@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You Shanta ❤️</title>
+    <title>For Shanta ❤️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
 
         * {
             margin: 0;
@@ -14,316 +14,277 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #ffdde1, #ee9ca7);
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background-image: radial-gradient(circle, #fbc2eb 0%, #a6c1ee 100%);
             height: 100vh;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: 'Poppins', sans-serif;
-        }
-
-        /* Floating Background Hearts */
-        .bg-heart {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.6);
-            animation: floatUp 10s linear infinite;
-            z-index: 0;
-            bottom: -10vh;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
-        }
-
-        /* Main Heart Design */
-        .container {
-            position: relative;
-            z-index: 10;
+            overflow: hidden;
             text-align: center;
-            width: 100%;
         }
 
-        .heart-wrapper {
+        /* Heart Animation */
+        .heart-container {
             position: relative;
-            width: 180px;
-            height: 160px;
-            margin: 0 auto 40px;
-            cursor: pointer;
-            transition: transform 0.5s ease;
-        }
-
-        .heart-wrapper:hover {
-            transform: scale(1.05);
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
         }
 
         .heart {
             background-color: #ff3860;
             display: inline-block;
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             position: relative;
             transform: rotate(-45deg);
-            box-shadow: 0 10px 30px rgba(255, 56, 96, 0.4);
-            animation: heartbeat 2s infinite ease-in-out;
+            box-shadow: 0 10px 20px rgba(255, 56, 96, 0.4);
         }
 
         .heart::before,
         .heart::after {
             content: "";
             background-color: #ff3860;
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             position: absolute;
         }
 
-        .heart::before { top: -90px; left: 0; }
-        .heart::after { top: 0; left: 90px; }
+        .heart::before { top: -75px; left: 0; }
+        .heart::after { top: 0; left: 75px; }
 
-        .name {
+        .name-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(45deg);
-            color: #fff;
+            color: white;
             font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            z-index: 20;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            font-size: 2.5rem;
+            z-index: 10;
             width: 100%;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         @keyframes heartbeat {
-            0%, 100% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(-45deg) scale(1.1); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        /* Message Box */
-        .msg-card {
-            background: rgba(255, 255, 255, 0.8);
+        /* Main Card */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
-            padding: 30px 20px;
+            padding: 40px 20px;
             border-radius: 20px;
-            width: 85%;
-            max-width: 500px;
-            margin: 0 auto;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 2px solid #fff;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            width: 90%;
+            max-width: 450px;
+            transition: transform 0.3s;
         }
 
-        .msg-card.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .message-text {
-            font-size: 1.4rem;
+        h1 {
             color: #d63384;
-            font-weight: 600;
-            min-height: 50px;
-            transition: opacity 0.5s ease-in-out;
-            opacity: 1;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-family: 'Dancing Script', cursive;
         }
 
-        .counter {
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #888;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        /* Buttons */
+        .btn-grp {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        /* Start Button */
-        .btn-start {
-            padding: 12px 35px;
-            background: #fff;
-            color: #ff3860;
-            border: 2px solid #ff3860;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-        }
-
-        .btn-start:hover {
-            background: #ff3860;
-            color: #fff;
-            box-shadow: 0 5px 15px rgba(255, 56, 96, 0.3);
-        }
-
-        /* Slow Flying Love Text */
-        .flying-love {
-            position: absolute;
-            color: #ff3860;
-            font-weight: bold;
+        button {
+            padding: 12px 30px;
             font-size: 1.2rem;
-            pointer-events: none;
-            animation: flySlow 3s ease-out forwards;
-            opacity: 0;
-            white-space: nowrap;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        @keyframes flySlow {
-            0% { transform: translate(-50%, 0) scale(0.8); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translate(-50%, -100px) scale(1.2); opacity: 0; }
+        .yes-btn {
+            background: #28a745;
+            color: white;
         }
 
-        .hidden { display: none; }
+        .yes-btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .no-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .no-btn:hover {
+            background: #c82333;
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s;
+        }
+
+        .screenshot-msg {
+            background: #fff;
+            color: #d63384;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px dashed #d63384;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
 
     </style>
 </head>
 <body>
 
-    <!-- Background Animation Container -->
-    <div id="bg-container"></div>
-
-    <div class="container">
-        <!-- The Heart -->
-        <div class="heart-wrapper" onclick="startLoveJourney()">
+    <!-- Proposal Section -->
+    <div class="card" id="proposalCard">
+        <div class="heart-container">
             <div class="heart">
-                <div class="name">Shanta</div>
+                <div class="name-text">Shanta</div>
             </div>
         </div>
+        
+        <h1 id="question">শান্তা, তুমি কি আমার হবে? ❤️</h1>
+        
+        <div class="btn-grp">
+            <button class="yes-btn" id="yesBtn" onclick="acceptLove()">YES 🥰</button>
+            <button class="no-btn" id="noBtn" onclick="makeExcuses()">NO 😢</button>
+        </div>
+    </div>
 
-        <!-- Start Button -->
-        <button class="btn-start" id="startBtn" onclick="startLoveJourney()">Open to my Heart</button>
-
-        <!-- Message Card -->
-        <div class="msg-card" id="msgCard">
-            <div class="message-text" id="textDisplay">My feelings for you...</div>
-            <div class="counter" id="counterDisplay">0 / 100</div>
+    <!-- Success Section -->
+    <div class="result-screen" id="successScreen">
+        <div class="heart-container">
+            <div class="heart" style="background-color: #ff3860;">
+                <div class="name-text" style="font-size: 2rem;">Love U</div>
+            </div>
+        </div>
+        <h1>Yeeey! I knew it! 🎉</h1>
+        
+        <div class="screenshot-msg">
+            📸 Take a Screenshot now <br> 
+            and send it to me!
         </div>
     </div>
 
     <script>
-        // Proposal Messages (Bengali & English Mixed)
-        const messages = [
-            "Shanta, I Love You ❤️", "তুমি আমার সব", "Will you be mine?", "তুমি আমার স্বপ্ন",
-            "আমার হৃদয়ে শুধু তুমি", "You are my world", "তুমি আমার অক্সিজেন", "তোমাকে ছাড়া আমি অসম্পূর্ণ",
-            "Be my Queen?", "তুমি আমার জীবনের আলো", "Forever yours", "তুমি কি আমার হবে?",
-            "শুধু তোমাকেই চাই", "My heart beats for you", "তুমি আমার সুখ", "ভালোবাসি তোমায়",
-            "Tumi amar jan", "Please accept my love", "You look beautiful", "আমি তোমার হতে চাই",
-            "সারা জীবন পাশে থেকো", "তুমি আমার পৃথিবী", "Love you infinity", "Shanta, you are special",
-            "My love for you is true", "তুমি আমার নিঃশ্বাস", "Don't break my heart", "তুমি আমার কবিতার লাইন",
-            "তোমার হাসি আমার প্রাণ", "You are my sunshine", "তোমাকে চাই", "আমার সবটুকু ভালোবাসা তোমার",
-            "Just say YES!", "তুমিহীন আমি শূন্য", "You complete me", "হাতে হাত রাখবে?",
-            "চলো একসাথে হাঁটি", "তুমি আমার ভ্যালেন্টাইন", "My sweet Shanta", "তোমার চোখের মায়ায় পড়েছি",
-            "তুমি আমার চাঁদ", "Life is better with you", "Always in my mind", "কখনো ছেড়ে যেও না",
-            "তোমার জন্য সব করতে পারি", "তুমি আমার রাজকন্যা", "I adore you", "তুমি আমার প্রথম প্রেম",
-            "তুমি আমার শেষ ভালোবাসা", "You are perfect", "God made you for me", "তোমার নাম আমার হৃদয়ে",
-            "Shanta + Me = ❤️", "I need you", "I want you", "তুমি আমার আকাশ",
-            "তুমি আমার সাগর", "My feelings are real", "Believe me", "তুমি আমার গল্পের নায়িকা",
-            "শাড়িতে তোমাকে দারুণ লাগে", "Take my heart", "It's all yours", "তুমি আমার প্রেরণা",
-            "Every moment I miss you", "Dreaming of you", "তুমি আমার গান", "ভালোবাসার রঙ তুমি",
-            "তুমি আমার গর্ব", "You are the one", "Hold my hand", "Stay with me",
-            "Never let me go", "তুমি আমার আরাধনা", "Love you forever", "তুমি আমার বর্তমান",
-            "তুমি আমার ভবিষ্যৎ", "I promise to love you", "Make me lucky", "তোমার মনটা আমাকে দাও",
-            "আমি তোমাকে আগলে রাখব", "You are an angel", "My heartbeat", "তোমার জন্য পাগল আমি",
-            "Crazy for you", "তুমি অনন্যা", "অতুলনীয় তুমি", "আমার চোখে তুমি সেরা",
-            "Best girl ever", "Shanta, I Love You!", "একটু ভালোবাসবে?", "আমার ভালোবাসা নিও",
-            "Please be mine", "Let's make memories", "Love Story begins...", "Will you marry me?",
-            "তোমাকে ছাড়া বাঁচব না", "I love you 3000"
+        // Bahana List (Excuses)
+        const excuses = [
+            "Are you sure?",
+            "প্লিজ না বলো না 😢",
+            "ভেবে দেখো একবার!",
+            "আমার হার্ট ভেঙে যাবে 💔",
+            "এত নিষ্ঠুর হইও না!",
+            "আমি কান্না করব কিন্তু 😭",
+            "Please Shanta...",
+            "Don't do this!",
+            "আর একবার সুযোগ দাও",
+            "আমি তোমাকে অনেক ভালোবাসি",
+            "না বলা যাবে না!",
+            "হাতটা ধরো প্লিজ",
+            "লক্ষ্মীটি ইয়েস বলো",
+            "Change your mind!",
+            "Really??",
+            "Is that your final answer?",
+            "You are breaking my heart",
+            "Just say YES! ❤️",
+            "No button কাজ করবে না 😜"
         ];
 
-        let isActive = false;
         let index = 0;
-        const textDisplay = document.getElementById('textDisplay');
-        const counterDisplay = document.getElementById('counterDisplay');
-        const bgContainer = document.getElementById('bg-container');
-        const heartWrapper = document.querySelector('.heart-wrapper');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const proposalCard = document.getElementById('proposalCard');
+        const successScreen = document.getElementById('successScreen');
+        const question = document.getElementById('question');
 
-        // Background Floating Hearts
-        setInterval(() => {
-            const heart = document.createElement('div');
-            heart.classList.add('bg-heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
-            bgContainer.appendChild(heart);
-            setTimeout(() => heart.remove(), 10000);
-        }, 800);
+        function makeExcuses() {
+            // Change No Button Text
+            noBtn.innerText = excuses[index];
+            index = (index + 1) % excuses.length;
 
-        function startLoveJourney() {
-            if (isActive) return;
-            isActive = true;
+            // Increase Yes Button Size slightly to pressure :)
+            let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize + 5) + 'px';
+            yesBtn.style.padding = '15px 40px';
+            
+            // Funny interaction: Move No button slightly to make it annoying
+            const randomX = Math.random() * 50 - 25;
+            const randomY = Math.random() * 50 - 25;
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
 
-            document.getElementById('startBtn').style.display = 'none';
-            document.getElementById('msgCard').classList.add('active');
-
-            // Change Heart Animation
-            heartWrapper.style.animation = "heartbeat 0.8s infinite ease-in-out"; 
-
-            showNextMessage();
-        }
-
-        function showNextMessage() {
-            if (index >= messages.length) {
-                textDisplay.innerHTML = "Shanta,<br>I will love you forever ❤️";
-                counterDisplay.innerText = "The End of List, Start of Love";
-                createConfetti();
-                return;
+            // Update Header Text occasionally
+            if (index % 3 === 0) {
+                question.innerText = "Please মানা করো না... 🥺";
             }
-
-            // 1. Fade Out Text
-            textDisplay.style.opacity = 0;
-
-            setTimeout(() => {
-                // 2. Change Text
-                textDisplay.innerText = messages[index];
-                counterDisplay.innerText = `${index + 1} / ${messages.length}`;
-                
-                // 3. Fade In Text
-                textDisplay.style.opacity = 1;
-
-                // 4. Create Flying Mini Text from Heart
-                createFlyingText(messages[index]);
-
-                index++;
-
-                // 5. Wait for 2.5 seconds before next message (Slow & Romantic)
-                setTimeout(showNextMessage, 2500); 
-
-            }, 500); // 0.5s for fade out effect
         }
 
-        function createFlyingText(msg) {
-            // Only show short text flying, or just a heart/emoji to keep it clean
-            const el = document.createElement('div');
-            el.classList.add('flying-love');
-            // Sometimes show text, sometimes show heart
-            el.innerText = Math.random() > 0.7 ? "❤️" : msg; 
+        function acceptLove() {
+            // Hide Proposal Card
+            proposalCard.style.display = 'none';
             
-            const rect = heartWrapper.getBoundingClientRect();
-            el.style.left = (rect.left + rect.width / 2) + 'px';
-            el.style.top = (rect.top + rect.height / 2) + 'px';
+            // Show Success Screen
+            successScreen.style.display = 'flex';
             
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 3000);
+            // Start Confetti
+            createConfetti();
         }
 
         function createConfetti() {
-            for(let i=0; i<50; i++) {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            
+            for (let i = 0; i < 100; i++) {
                 const conf = document.createElement('div');
-                conf.innerHTML = '🌸';
-                conf.style.position = 'absolute';
+                conf.classList.add('confetti');
                 conf.style.left = Math.random() * 100 + 'vw';
-                conf.style.top = -10 + 'vh';
-                conf.style.animation = "floatUp 4s linear forwards reverse";
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animationDuration = Math.random() * 2 + 3 + 's';
                 document.body.appendChild(conf);
             }
         }
+
     </script>
 </body>
 </html>
