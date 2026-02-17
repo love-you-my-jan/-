@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You Shanta ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #ffdde1, #ee9ca7);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Floating Background Hearts */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            animation: floatUp 10s linear infinite;
+            z-index: 0;
+            bottom: -10vh;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Main Heart Design */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+        }
+
+        .heart-wrapper {
+            position: relative;
+            width: 180px;
+            height: 160px;
+            margin: 0 auto 40px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .heart-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .heart {
+            background-color: #ff3860;
+            display: inline-block;
+            width: 180px;
+            height: 180px;
+            position: relative;
+            transform: rotate(-45deg);
+            box-shadow: 0 10px 30px rgba(255, 56, 96, 0.4);
+            animation: heartbeat 2s infinite ease-in-out;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            background-color: #ff3860;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before { top: -90px; left: 0; }
+        .heart::after { top: 0; left: 90px; }
+
+        .name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            color: #fff;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            z-index: 20;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            width: 100%;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
+        }
+
+        /* Message Box */
+        .msg-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 85%;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 2px solid #fff;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .msg-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-text {
+            font-size: 1.4rem;
+            color: #d63384;
+            font-weight: 600;
+            min-height: 50px;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
+        }
+
+        .counter {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Start Button */
+        .btn-start {
+            padding: 12px 35px;
+            background: #fff;
+            color: #ff3860;
+            border: 2px solid #ff3860;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn-start:hover {
+            background: #ff3860;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 56, 96, 0.3);
+        }
+
+        /* Slow Flying Love Text */
+        .flying-love {
+            position: absolute;
+            color: #ff3860;
+            font-weight: bold;
+            font-size: 1.2rem;
+            pointer-events: none;
+            animation: flySlow 3s ease-out forwards;
+            opacity: 0;
+            white-space: nowrap;
+        }
+
+        @keyframes flySlow {
+            0% { transform: translate(-50%, 0) scale(0.8); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translate(-50%, -100px) scale(1.2); opacity: 0; }
+        }
+
+        .hidden { display: none; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation Container -->
+    <div id="bg-container"></div>
+
+    <div class="container">
+        <!-- The Heart -->
+        <div class="heart-wrapper" onclick="startLoveJourney()">
+            <div class="heart">
+                <div class="name">Shanta</div>
+            </div>
+        </div>
+
+        <!-- Start Button -->
+        <button class="btn-start" id="startBtn" onclick="startLoveJourney()">Open to my Heart</button>
+
+        <!-- Message Card -->
+        <div class="msg-card" id="msgCard">
+            <div class="message-text" id="textDisplay">My feelings for you...</div>
+            <div class="counter" id="counterDisplay">0 / 100</div>
+        </div>
+    </div>
+
+    <script>
+        // Proposal Messages (Bengali & English Mixed)
+        const messages = [
+            "Shanta, I Love You ❤️", "তুমি আমার সব", "Will you be mine?", "তুমি আমার স্বপ্ন",
+            "আমার হৃদয়ে শুধু তুমি", "You are my world", "তুমি আমার অক্সিজেন", "তোমাকে ছাড়া আমি অসম্পূর্ণ",
+            "Be my Queen?", "তুমি আমার জীবনের আলো", "Forever yours", "তুমি কি আমার হবে?",
+            "শুধু তোমাকেই চাই", "My heart beats for you", "তুমি আমার সুখ", "ভালোবাসি তোমায়",
+            "Tumi amar jan", "Please accept my love", "You look beautiful", "আমি তোমার হতে চাই",
+            "সারা জীবন পাশে থেকো", "তুমি আমার পৃথিবী", "Love you infinity", "Shanta, you are special",
+            "My love for you is true", "তুমি আমার নিঃশ্বাস", "Don't break my heart", "তুমি আমার কবিতার লাইন",
+            "তোমার হাসি আমার প্রাণ", "You are my sunshine", "তোমাকে চাই", "আমার সবটুকু ভালোবাসা তোমার",
+            "Just say YES!", "তুমিহীন আমি শূন্য", "You complete me", "হাতে হাত রাখবে?",
+            "চলো একসাথে হাঁটি", "তুমি আমার ভ্যালেন্টাইন", "My sweet Shanta", "তোমার চোখের মায়ায় পড়েছি",
+            "তুমি আমার চাঁদ", "Life is better with you", "Always in my mind", "কখনো ছেড়ে যেও না",
+            "তোমার জন্য সব করতে পারি", "তুমি আমার রাজকন্যা", "I adore you", "তুমি আমার প্রথম প্রেম",
+            "তুমি আমার শেষ ভালোবাসা", "You are perfect", "God made you for me", "তোমার নাম আমার হৃদয়ে",
+            "Shanta + Me = ❤️", "I need you", "I want you", "তুমি আমার আকাশ",
+            "তুমি আমার সাগর", "My feelings are real", "Believe me", "তুমি আমার গল্পের নায়িকা",
+            "শাড়িতে তোমাকে দারুণ লাগে", "Take my heart", "It's all yours", "তুমি আমার প্রেরণা",
+            "Every moment I miss you", "Dreaming of you", "তুমি আমার গান", "ভালোবাসার রঙ তুমি",
+            "তুমি আমার গর্ব", "You are the one", "Hold my hand", "Stay with me",
+            "Never let me go", "তুমি আমার আরাধনা", "Love you forever", "তুমি আমার বর্তমান",
+            "তুমি আমার ভবিষ্যৎ", "I promise to love you", "Make me lucky", "তোমার মনটা আমাকে দাও",
+            "আমি তোমাকে আগলে রাখব", "You are an angel", "My heartbeat", "তোমার জন্য পাগল আমি",
+            "Crazy for you", "তুমি অনন্যা", "অতুলনীয় তুমি", "আমার চোখে তুমি সেরা",
+            "Best girl ever", "Shanta, I Love You!", "একটু ভালোবাসবে?", "আমার ভালোবাসা নিও",
+            "Please be mine", "Let's make memories", "Love Story begins...", "Will you marry me?",
+            "তোমাকে ছাড়া বাঁচব না", "I love you 3000"
+        ];
+
+        let isActive = false;
+        let index = 0;
+        const textDisplay = document.getElementById('textDisplay');
+        const counterDisplay = document.getElementById('counterDisplay');
+        const bgContainer = document.getElementById('bg-container');
+        const heartWrapper = document.querySelector('.heart-wrapper');
+
+        // Background Floating Hearts
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+            bgContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 10000);
+        }, 800);
+
+        function startLoveJourney() {
+            if (isActive) return;
+            isActive = true;
+
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('msgCard').classList.add('active');
+
+            // Change Heart Animation
+            heartWrapper.style.animation = "heartbeat 0.8s infinite ease-in-out"; 
+
+            showNextMessage();
+        }
+
+        function showNextMessage() {
+            if (index >= messages.length) {
+                textDisplay.innerHTML = "Shanta,<br>I will love you forever ❤️";
+                counterDisplay.innerText = "The End of List, Start of Love";
+                createConfetti();
+                return;
+            }
+
+            // 1. Fade Out Text
+            textDisplay.style.opacity = 0;
+
+            setTimeout(() => {
+                // 2. Change Text
+                textDisplay.innerText = messages[index];
+                counterDisplay.innerText = `${index + 1} / ${messages.length}`;
+                
+                // 3. Fade In Text
+                textDisplay.style.opacity = 1;
+
+                // 4. Create Flying Mini Text from Heart
+                createFlyingText(messages[index]);
+
+                index++;
+
+                // 5. Wait for 2.5 seconds before next message (Slow & Romantic)
+                setTimeout(showNextMessage, 2500); 
+
+            }, 500); // 0.5s for fade out effect
+        }
+
+        function createFlyingText(msg) {
+            // Only show short text flying, or just a heart/emoji to keep it clean
+            const el = document.createElement('div');
+            el.classList.add('flying-love');
+            // Sometimes show text, sometimes show heart
+            el.innerText = Math.random() > 0.7 ? "❤️" : msg; 
+            
+            const rect = heartWrapper.getBoundingClientRect();
+            el.style.left = (rect.left + rect.width / 2) + 'px';
+            el.style.top = (rect.top + rect.height / 2) + 'px';
+            
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 3000);
+        }
+
+        function createConfetti() {
+            for(let i=0; i<50; i++) {
+                const conf = document.createElement('div');
+                conf.innerHTML = '🌸';
+                conf.style.position = 'absolute';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.top = -10 + 'vh';
+                conf.style.animation = "floatUp 4s linear forwards reverse";
+                document.body.appendChild(conf);
+            }
+        }
+    </script>
+</body>
+</html>
